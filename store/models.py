@@ -1,5 +1,4 @@
-from datetime import datetime
-from time import timezone
+import datetime
 
 from django.contrib.auth.models import User
 from django.db.models import BooleanField, CASCADE, CharField, DateTimeField, DecimalField, \
@@ -163,8 +162,8 @@ class Order(Model):
     @property
     def loyalty_points(self):
         date_ordered = self.date_ordered
-        current_date = timezone.now()
-        date_after_order = date_ordered + datetime(day=30)
+        current_date = datetime.now()
+        date_after_order = date_ordered + datetime(day=28)
         date_expiration = date_after_order + datetime(year=1)
         if date_after_order >= current_date <= date_expiration:
             points = self.get_cart_total / 10
