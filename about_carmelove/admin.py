@@ -5,6 +5,7 @@ from .models import Article
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'preface', 'text')
+    list_display = ('title_nav', 'preface_nav',
+                    'title_midmost', 'preface_midmost', 'text')
 
 
