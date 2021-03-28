@@ -11,8 +11,8 @@ def cookie_cart(request):
 
     print('Cart:', cart)
     items = []
-    order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
-    cart_items = order['get_cart_items']
+    order = {'cart_total': 0, 'cart_items': 0, 'shipping': False}
+    cart_items = order['cart_items']
 
     for c in cart:
         try:
@@ -24,8 +24,8 @@ def cookie_cart(request):
             # else:
             #     total = (product.price * cart[c]['quantity'])
 
-            order['get_cart_total'] += total
-            order['get_cart_items'] += cart[c]['quantity']
+            order['cart_total'] += total
+            order['cart_items'] += cart[c]['quantity']
 
             # need to add if statement for promotion_price
             item = {
@@ -36,7 +36,7 @@ def cookie_cart(request):
                     'imageURL': product.imageURL,
                 },
                 'quantity': cart[c]['quantity'],
-                'get_total': total,
+                'total': total,
             }
             items.append(item)
 
@@ -53,7 +53,7 @@ def cart_data(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
+        cart_items = order.cart_items
     else:
         cookie_data = cookie_cart(request)
         customer = None
