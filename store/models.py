@@ -29,7 +29,7 @@ class Customer(Model):
         orders = all_orders.filter(complete=True)
         user_products = []
         for order in orders:
-            items = order.get_orderitems
+            items = order.orderitems
             for item in items:
                 if item.name in user_products:
                     pass
